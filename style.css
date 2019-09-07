@@ -1,0 +1,42 @@
+/* 当网络较慢，网页还在加载 Vue.js ，而导致 Vue 来不及渲染，
+这时页面就会显示出 Vue 源代码,用 v-cloak 指令来解决屏幕闪动的问题 */
+[v-cloak]{
+	display: none;
+}
+/* 表格整体样式 */
+table{
+	width: 600px;
+	border: 1px solid #e9e9e9;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	margin: auto;
+}
+/* 设置表格底部全选及总价的位置 */
+.footer{
+	width: 200px;
+	margin-left: 380px;
+	margin-top: 10px;
+}
+/* 表格内部行样式及字体 */
+th,td{
+	padding: 8px 16px;
+	border: 1px solid #E9E9E9;
+	text-align: center;
+}
+/* 表格第二行样式 */
+th{
+	background: skyblue;
+	color: #5c6b77;
+	font-weight: 600;
+	white-space: nowrap;
+}
+/* 设置商品种类一行的背景色及字体 */
+.category{
+	text-align: left;
+	background: peachpuff;
+}
+/* 鼠标移入某一行时改变为该背景色 */
+tbody tr:hover{
+	background: #E9E9E9;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车示例</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!--v-cloak会在vue实例结束编译时从绑定的HTML元素上移出。-->
+		<div id="app" v-cloak>
+			<template v-if="list.length">
+				<table v-for="(item,index) in list"><!-- 第一个v-for用于渲染整个表格内容 -->
+					<thead>
+						<tr>
+							<th class="category"><input type="checkbox" :checked="item.isCheckType" @click="isSelectType(index)" /></th>
+							<th class="category" colspan="5">{{item.name}}</th>
+						</tr>
+						<tr>
+							<th></th>
+							<th>选择</th>
+							<th>商品名称</th>
+							<th>商品单价</th>
+							<th>购买数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr v-for="(subitem,subindex) in item.list" ><!-- 第二个v-for用于渲染每个商品种类下的小表格内容 -->
+							<td></td>
+							<td><input type="checkbox" :checked="subitem.isCheck" @click="isSelectGoods(index,subindex)" /></td>
+							<td>{{subitem.name}}</td>
+							<td>{{subitem.price}}</td>
+							<!-- 购买数量的加减方法 -->
+							<td>
+								<button
+									@click="handleReduce(index,subindex)"
+									:disabled="subitem.count === 1">-</button>
+								{{subitem.count}}
+								<button @click="handleAdd(index,subindex)">+</button>
+							</td>
+							<!-- 移除商品操作 -->
+							<td>
+								<button @click="handleRemove(index,subindex)">移除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="footer">
+					全选：<input type="checkbox" :checked="isCheckAll" @click="isSelectAll()" />
+					<div>总价：￥{{totalPrice}}</div>
+				</div>
+			</template>
+			<div v-else>购物车为空</div>
+		</div>
+		<script type="text/javascript" src="vue文件/vue.js" ></script>
+		<script type="text/javascript" src="index.js" ></script>
+		<!--
+			这里将vue.js和index.js文件写在<body>的最底部，是因为：如果写在<head>里，vue实例将无法创建，
+			因为此时DOM还没有被解析完成，除非通过异步或在事件DOMContentLoaded（IE是onreadystatechange）
+			触发时再创建vue实例，这有点像jQurey的$(document).ready()方法。
+		-->
+	</body>
+</html>
